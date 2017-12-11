@@ -20,40 +20,43 @@ import ru.evotor.devices.commons.printer.printable.PrintableText;
 public final class ReceiptPrinter {
 
     private static final String ACTION_PRINT_DOCUMENT = "ru.softc.devices.action.PRINT_DOCUMENT";
-    /**
-     * Идентификатор принтера
-     */
+
     private final long id;
-    /**
-     * Наименование принтера
-     */
     private final String name;
-    /**
-     * Ширина печати в символах стандартного шрифта
-     */
     private final int printWidth;
 
     private static final String PACKAGE_NAME = "ru.softc.evotorserviceprinter";
     private static final String SERVICE_NAME = "ru.softc.evotorserviceprinter.PrinterDriverService";
 
-    public ReceiptPrinter(long id, String name, int printWidth) {
+    private ReceiptPrinter(long id, String name, int printWidth) {
         this.id = id;
         this.name = name;
         this.printWidth = printWidth;
     }
 
+    /**
+     * Идентификатор принтера
+     */
     public long getId() {
         return id;
     }
-
+    /**
+     * Наименование принтера
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * Ширина печати в символах стандартного шрифта
+     */
     public int getPrintWidth() {
         return printWidth;
     }
 
+    /**
+     * @param context Контекст приложения
+     * @return Наличие драйвера на устройстве
+     */
     public static boolean isDriverInstalled(Context context) {
         final PackageManager packageManager = context.getPackageManager();
         try {
@@ -64,6 +67,10 @@ public final class ReceiptPrinter {
         return true;
     }
 
+    /**
+     * @param context Контекст приложения
+     * @return Список настроенный принтеров
+     */
     public static ReceiptPrinter[] getPrinters(Context context) {
         final ArrayList<ReceiptPrinter> printers = new ArrayList<>();
         final Cursor cursor = context.getContentResolver().query(Uri.parse("content://ru.softc.receiptprinter.Printers"), null, null, null, null);
@@ -79,6 +86,11 @@ public final class ReceiptPrinter {
         return printers.toArray(new ReceiptPrinter[0]);
     }
 
+    /**
+     * @param context Контекст приложения
+     * @param printerId Идентификатор принтера
+     * @param document Документ для печати
+     */
     public static void print(Context context, long printerId, PrinterDocument document) {
         final ComponentName name = new ComponentName(PACKAGE_NAME, SERVICE_NAME);
         final Intent starter = new Intent(ACTION_PRINT_DOCUMENT);
