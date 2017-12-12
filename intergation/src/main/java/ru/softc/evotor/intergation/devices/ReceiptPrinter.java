@@ -11,7 +11,6 @@ import android.provider.BaseColumns;
 import java.util.ArrayList;
 
 import ru.evotor.devices.commons.printer.PrinterDocument;
-import ru.evotor.devices.commons.printer.printable.PrintableText;
 
 /**
  * Created by capcom on 11.12.2017.
@@ -23,15 +22,15 @@ public final class ReceiptPrinter {
 
     private final long id;
     private final String name;
-    private final int printWidth;
+    private final int allowableSymbolsLineLength;
 
     private static final String PACKAGE_NAME = "ru.softc.evotorserviceprinter";
     private static final String SERVICE_NAME = "ru.softc.evotorserviceprinter.PrinterDriverService";
 
-    private ReceiptPrinter(long id, String name, int printWidth) {
+    private ReceiptPrinter(long id, String name, int allowableSymbolsLineLength) {
         this.id = id;
         this.name = name;
-        this.printWidth = printWidth;
+        this.allowableSymbolsLineLength = allowableSymbolsLineLength;
     }
 
     /**
@@ -49,8 +48,8 @@ public final class ReceiptPrinter {
     /**
      * Ширина печати в символах стандартного шрифта
      */
-    public int getPrintWidth() {
-        return printWidth;
+    public int getAllowableSymbolsLineLength() {
+        return allowableSymbolsLineLength;
     }
 
     /**
@@ -117,6 +116,6 @@ public final class ReceiptPrinter {
 
     @Override
     public String toString() {
-        return "Id: " + this.id + "; Name: " + this.name + "; Width: " + this.printWidth;
+        return "Id: " + this.id + "; Name: " + this.name + "; Width: " + this.allowableSymbolsLineLength;
     }
 }
