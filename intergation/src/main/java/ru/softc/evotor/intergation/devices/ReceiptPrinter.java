@@ -86,12 +86,26 @@ public final class ReceiptPrinter {
         return printers.toArray(new ReceiptPrinter[0]);
     }
 
+    public static ReceiptPrinter getPrinter(Context context, long id) {
+        final Cursor cursor = context.getContentResolver().query(Uri.parse("content://ru.softc.receiptprinter.Printers/" + id), null, null, null, null);
+
+        final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
+        final int nameIndex = cursor.getColumnIndex("name");
+        final int widthIndex = cursor.getColumnIndex("symbol_width");
+
+        if (cursor.moveToNext()) {
+            return new ReceiptPrinter(cursor.getLong(idIndex), cursor.getString(nameIndex), cursor.getInt(widthIndex));
+        }
+
+        return null;
+    }
+
     /**
      * @param context Контекст приложения
      * @param printerId Идентификатор принтера
      * @param document Документ для печати
      */
-    public static void print(Context context, long printerId, PrinterDocument document) {
+    public static void printDocument(Context context, long printerId, PrinterDocument document) {
         final ComponentName name = new ComponentName(PACKAGE_NAME, SERVICE_NAME);
         final Intent starter = new Intent(ACTION_PRINT_DOCUMENT);
         starter.putExtra("EXTRA_PRINTER_ID", printerId);
