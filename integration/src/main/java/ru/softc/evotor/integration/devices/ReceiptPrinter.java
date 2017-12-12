@@ -1,4 +1,4 @@
-package ru.softc.evotor.intergation.devices;
+package ru.softc.evotor.integration.devices;
 
 import android.content.ComponentName;
 import android.content.Context;

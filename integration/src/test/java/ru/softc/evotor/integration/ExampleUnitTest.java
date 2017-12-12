@@ -1,4 +1,4 @@
-package ru.softc.evotor.intergation;
+package ru.softc.evotor.integration;
 
 import org.junit.Test;
 
