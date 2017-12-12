@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         if (ReceiptPrinter.isDriverInstalled(getApplicationContext())) {
             for (ReceiptPrinter printer :
                     ReceiptPrinter.getPrinters(this)) {
-                builder.append(printer.toString() + "\r\n");
+//                builder.append(printer.toString() + "\r\n");
 
-                ReceiptPrinter.print(this, printer.getId(), new PrinterDocument(
+                ReceiptPrinter.printDocument(this, printer.getId(), new PrinterDocument(
                         new PrintableText("Первая строка"),
                         new PrintableText("Довольно длинный текст, помещающийся лишь на несколько строк")
                 ));

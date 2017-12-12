@@ -85,6 +85,11 @@ public final class ReceiptPrinter {
         return printers.toArray(new ReceiptPrinter[0]);
     }
 
+    /**
+     * @param context Контекст приложения
+     * @param id Идентификатор принтера
+     * @return Найденный принтер или null в случае его отсутствия
+     */
     public static ReceiptPrinter getPrinter(Context context, long id) {
         final Cursor cursor = context.getContentResolver().query(Uri.parse("content://ru.softc.receiptprinter.Printers/" + id), null, null, null, null);
 

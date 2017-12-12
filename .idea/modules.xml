@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EvotorIntegrationLibrary.iml" filepath="$PROJECT_DIR$/EvotorIntegrationLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/intergation/intergation.iml" filepath="$PROJECT_DIR$/intergation/intergation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/integration/integration.iml" filepath="$PROJECT_DIR$/integration/integration.iml" />
     </modules>
   </component>
 </project>

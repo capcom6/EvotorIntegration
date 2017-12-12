@@ -1,1 +1,1 @@
-include ':app', ':intergation'
+include ':app', ':integration'
