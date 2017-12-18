@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import ru.evotor.devices.commons.printer.PrinterDocument;
 import ru.evotor.devices.commons.printer.printable.PrintableText;
+import ru.softc.evotor.integration.devices.PrintableAlignedText;
 import ru.softc.evotor.integration.devices.ReceiptPrinter;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
                 ReceiptPrinter.printDocument(this, printer.getId(), new PrinterDocument(
                         new PrintableText("Первая строка"),
-                        new PrintableText("Довольно длинный текст, помещающийся лишь на несколько строк")
+                        new PrintableText("Довольно длинный текст, помещающийся лишь на несколько строк"),
+                        new PrintableAlignedText(PrintableAlignedText.Align.CENTER, "По центру"),
+                        new PrintableAlignedText(PrintableAlignedText.Align.RIGHT, "Справа")
                 ));
             }
         }
