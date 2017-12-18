@@ -29,6 +29,10 @@ public class PrintableAlignedText extends PrintableText {
         this.align = align;
     }
 
+    public Align getAlign() {
+        return align;
+    }
+
     @Override
     public int describeContents() {
         return 0;
