@@ -17,6 +17,7 @@ import ru.evotor.devices.commons.printer.PrinterDocument;
  */
 
 public final class ReceiptPrinter {
+    public static final String PERMISSION = "ru.softc.permission.receiptprinter.PRINT";
 
     private static final String ACTION_PRINT_DOCUMENT = "ru.softc.devices.action.PRINT_DOCUMENT";
 
@@ -74,12 +75,16 @@ public final class ReceiptPrinter {
         final ArrayList<ReceiptPrinter> printers = new ArrayList<>();
         final Cursor cursor = context.getContentResolver().query(Uri.parse("content://ru.softc.receiptprinter.Printers"), null, null, null, null);
 
-        final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
-        final int nameIndex = cursor.getColumnIndex("name");
-        final int widthIndex = cursor.getColumnIndex("symbol_width");
+        try {
+            final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
+            final int nameIndex = cursor.getColumnIndex("name");
+            final int widthIndex = cursor.getColumnIndex("symbol_width");
 
-        while (cursor.moveToNext()) {
-            printers.add(new ReceiptPrinter(cursor.getLong(idIndex), cursor.getString(nameIndex), cursor.getInt(widthIndex)));
+            while (cursor.moveToNext()) {
+                printers.add(new ReceiptPrinter(cursor.getLong(idIndex), cursor.getString(nameIndex), cursor.getInt(widthIndex)));
+            }
+        } finally {
+            cursor.close();
         }
 
         return printers.toArray(new ReceiptPrinter[0]);
@@ -93,12 +98,16 @@ public final class ReceiptPrinter {
     public static ReceiptPrinter getPrinter(Context context, long id) {
         final Cursor cursor = context.getContentResolver().query(Uri.parse("content://ru.softc.receiptprinter.Printers/" + id), null, null, null, null);
 
-        final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
-        final int nameIndex = cursor.getColumnIndex("name");
-        final int widthIndex = cursor.getColumnIndex("symbol_width");
+        try {
+            final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
+            final int nameIndex = cursor.getColumnIndex("name");
+            final int widthIndex = cursor.getColumnIndex("symbol_width");
 
-        if (cursor.moveToNext()) {
-            return new ReceiptPrinter(cursor.getLong(idIndex), cursor.getString(nameIndex), cursor.getInt(widthIndex));
+            if (cursor.moveToNext()) {
+                return new ReceiptPrinter(cursor.getLong(idIndex), cursor.getString(nameIndex), cursor.getInt(widthIndex));
+            }
+        } finally {
+            cursor.close();
         }
 
         return null;
