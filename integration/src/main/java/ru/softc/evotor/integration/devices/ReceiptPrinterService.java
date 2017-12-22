@@ -17,8 +17,6 @@ import ru.evotor.devices.commons.services.AbstractService;
  */
 
 public class ReceiptPrinterService extends AbstractService {
-    public static final String UNKNOWN_EXCEPTION_TEXT = "Request to DeviceService failed";
-
     private static final String ACTION_PRINTER_SERVICE = "ru.softc.devices.action.PRINTER_SERVICE";
     private static final String TARGET_PACKAGE = "ru.softc.evotorserviceprinter";
     private static final String TARGET_CLASS_NAME = "ru.softc.evotorserviceprinter.PrinterManagerService";
