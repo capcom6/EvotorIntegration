@@ -11,6 +11,7 @@ import android.provider.BaseColumns;
 import java.util.ArrayList;
 
 import ru.evotor.devices.commons.printer.PrinterDocument;
+import ru.evotor.framework.navigation.NavigationApi;
 
 /**
  * Created by capcom on 11.12.2017.
@@ -26,6 +27,7 @@ public final class ReceiptPrinter {
     private final int allowableSymbolsLineLength;
 
     private static final String PACKAGE_NAME = "ru.softc.evotorserviceprinter";
+    private static final String ACTIVITY_NAME = "ru.softc.evotorserviceprinter.MainActivity";
     private static final String SERVICE_NAME = "ru.softc.evotorserviceprinter.PrinterDriverService";
 
     private ReceiptPrinter(long id, String name, int allowableSymbolsLineLength) {
@@ -51,6 +53,15 @@ public final class ReceiptPrinter {
      */
     public int getAllowableSymbolsLineLength() {
         return allowableSymbolsLineLength;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public static Intent createIntentForSettings() {
+        final ComponentName name = new ComponentName(PACKAGE_NAME, ACTIVITY_NAME);
+        final Intent starter = new Intent();
+        starter.setComponent(name);
+        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return starter;
     }
 
     /**

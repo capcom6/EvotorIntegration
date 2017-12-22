@@ -20,6 +20,15 @@ public class ServicePrint {
 
     private static final String PACKAGE_NAME = "ru.softc.evotor.serviceprint";
     private static final String SERVICE_NAME = "ru.softc.evotor.serviceprint.services.PrintDivideService";
+    private static final String ACTIVITY_NAME = "ru.softc.evotor.serviceprint.MainActivity";
+
+    public static Intent createIntentForSettings() {
+        final ComponentName name = new ComponentName(PACKAGE_NAME, ACTIVITY_NAME);
+        final Intent starter = new Intent();
+        starter.setComponent(name);
+        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return starter;
+    }
 
     public static boolean isAppInstalled(Context context) {
         final PackageManager packageManager = context.getPackageManager();
