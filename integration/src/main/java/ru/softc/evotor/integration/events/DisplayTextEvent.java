@@ -1,12 +1,15 @@
-package ru.softc.evotor.integration.devices;
+package ru.softc.evotor.integration.events;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 
 import ru.softc.evotor.integration.devices.PrintableAlignedText;
 
 public class DisplayTextEvent {
-    public static final String ACTION_DISPLAY_TEXT_EVENT = "ru.softc.devices.action.DISPLAY_TEXT";
+    private static final String PACKAGE_NAME = "ru.softc.evotor.customerdisplay";
+    private static final String SERVICE_NAME = "ru.softc.evotor.customerdisplay.services.CustomerDisplayService";
+    private static final String ACTION_DISPLAY_TEXT_EVENT = "ru.softc.devices.action.DISPLAY_TEXT";
 
     private static final String EXTRA_LINE_1 = "EXTRA_LINE1";
     private static final String EXTRA_LINE_2 = "EXTRA_LINE2";
@@ -17,8 +20,6 @@ public class DisplayTextEvent {
     private final PrintableAlignedText line2;
     private final boolean clear;
     private final boolean wordwrap;
-
-    public static IntentFilter INTENT_FILTER = new IntentFilter(ACTION_DISPLAY_TEXT_EVENT);
 
     public static DisplayTextEvent fromIntent(Intent intent) {
         if (!ACTION_DISPLAY_TEXT_EVENT.equals(intent.getAction())) {
@@ -42,6 +43,7 @@ public class DisplayTextEvent {
 
     public Intent makeIntent() {
         final Intent intent = new Intent(ACTION_DISPLAY_TEXT_EVENT);
+        intent.setComponent(new ComponentName(PACKAGE_NAME, SERVICE_NAME));
 
         if (line1 != null) {
             intent.putExtra(EXTRA_LINE_1, line1);
@@ -70,7 +72,6 @@ public class DisplayTextEvent {
     public boolean isWordwrap() {
         return wordwrap;
     }
-
 
     public static class Builder {
         private PrintableAlignedText line1;
