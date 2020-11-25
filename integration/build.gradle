@@ -4,15 +4,15 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.capcom6'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 26
-        versionCode 1
-        versionName "0.4.0"
+        versionCode 3
+        versionName "0.5.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -21,14 +21,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation 'com.android.support:appcompat-v7:25.4.0'
-    implementation 'com.github.evotor:integration-library:v0.4.32'
-    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    
+    implementation 'com.github.evotor:integration-library:v0.4.45'
+    
+    testImplementation 'junit:junit:4.13.1'
 }
